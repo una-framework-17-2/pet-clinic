@@ -1,0 +1,7 @@
+create table animal (
+  id BIGINT NOT NULL AUTO_INCREMENT,
+  nome VARCHAR(256) NOT NULL,
+  vacina VARCHAR(256) NULL,
+  especie VARCHAR(256) NOT NULL,
+  sexo VARCHAR(10) NOT NULL,
+  PRIMARY KEY (id));

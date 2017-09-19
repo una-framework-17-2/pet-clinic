@@ -1,0 +1,73 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link rel="stylesheet" href="/css/bootstrap.min.css"/>
+</head>
+<body>
+
+<form th:action="@{/}" th:object="${animal}" method="post">
+    <input th:field="*{id}" type="hidden"/>
+    <label>Nome</label>
+    <input th:field="*{nome}" type="text"/>
+    <br/>
+    <label>Sexo</label>
+    <label for="masc">Masculino</label>
+    <input th:checked="*{sexo !=null ? sexo.toString():'' == 'MASCULINO'}" type="radio" id="masc" name="sexo"
+           value="MASCULINO"/>
+    <label for="fem">Feminino</label>
+    <input th:checked="*{sexo !=null ? sexo.toString():'' == 'FEMININO'}" type="radio" id="fem" name="sexo"
+           value="FEMININO"/>
+    <br/>
+    <label>Especie</label>
+    <select th:field="*{especie}">
+        <option value="elefante">Elefante</option>
+        <option value="camelo">Camelo</option>
+        <option value="tigre">Tigre</option>
+        <option value="papagaio">Papagaio</option>
+    </select>
+    <br/>
+    <label>Vacina</label>
+    <label for="vacinaA">Vacina A</label>
+    <input th:checked="*{vacina.contains('A')}" type="checkbox" id="vacinaA" name="vacina" value="A"/>
+    <label for="vacinaB">Vacina B</label>
+    <input th:checked="*{vacina.contains('B')}" type="checkbox" id="vacinaB" name="vacina" value="B"/>
+    <label for="vacinaC">Vacina C</label>
+    <input th:checked="*{vacina.contains('C')}" type="checkbox" id="vacinaC" name="vacina" value="C"/>
+    <label for="vacinaD">Vacina D</label>
+    <input th:checked="*{vacina.contains('D')}" type="checkbox" id="vacinaD" name="vacina" value="D"/>
+    <button type="submit">Salvar</button>
+</form>
+
+
+<br/>
+<form th:action="@{/buscar}" method="get">
+    <input type="text" name="nome"/>
+    <button type="submit">buscar</button>
+</form>
+
+
+<table class="table">
+    <thead>
+    <tr scope="row">
+        <th>nome</th>
+        <th>sexo</th>
+        <th>especie</th>
+        <th>vacina</th>
+        <th>Editar</th>
+        <th>Excluir</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="animal: ${animais}">
+        <td th:text="${animal.nome}"></td>
+        <td th:text="${animal.sexo}"></td>
+        <td th:text="${animal.especie}"></td>
+        <td th:text="${animal.vacina}"></td>
+        <td><a th:href="@{/{id}(id=${animal.id})}">Editar</a></td>
+        <td><a th:href="@{/excluir/{id}(id=${animal.id})}">Excluir</a></td>
+    </tr>
+    </tbody>
+</table>
+
+</body>
+</html>
