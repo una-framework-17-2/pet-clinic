@@ -8,6 +8,8 @@
     <input th:field="*{id}" type="hidden"/>
     <label>Nome</label>
     <input th:field="*{nome}" type="text"/>
+    <span  th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"
+            class="badge badge-danger" >erro</span>
     <br/>
     <label>Sexo</label>
     <label for="masc">Masculino</label>
@@ -16,14 +18,19 @@
     <label for="fem">Feminino</label>
     <input th:checked="*{sexo !=null ? sexo.toString():'' == 'FEMININO'}" type="radio" id="fem" name="sexo"
            value="FEMININO"/>
+    <span  th:if="${#fields.hasErrors('sexo')}" th:errors="*{sexo}"
+           class="badge badge-danger" >erro</span>
     <br/>
     <label>Especie</label>
     <select th:field="*{especie}">
+        <option value="">Selecione</option>
         <option value="elefante">Elefante</option>
         <option value="camelo">Camelo</option>
         <option value="tigre">Tigre</option>
         <option value="papagaio">Papagaio</option>
     </select>
+    <span  th:if="${#fields.hasErrors('especie')}" th:errors="*{especie}"
+           class="badge badge-danger" >erro</span>
     <br/>
     <label>Vacina</label>
     <label for="vacinaA">Vacina A</label>

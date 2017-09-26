@@ -5,7 +5,10 @@ import br.una.frameworks.petclinic.repository.AnimalRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
 
 @Controller
 public class AnimalController {
@@ -40,7 +43,11 @@ public class AnimalController {
     }
 
     @PostMapping("/")
-    public String salvar(@ModelAttribute Animal animal) {
+    public String salvar(@Valid @ModelAttribute Animal animal,
+                         BindingResult bindingResult) {
+        if(bindingResult.hasErrors()){
+            return "animal/listar";
+        }
         animalRepository.save(animal);
         return "redirect:/";
     }
