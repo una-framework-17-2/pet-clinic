@@ -1,11 +1,13 @@
 package br.una.frameworks.petclinic.entity;
 
 import br.una.frameworks.petclinic.enumerator.Sexo;
+import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotBlank;
 
 import javax.persistence.*;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 @Entity
 public class Animal {
@@ -13,7 +15,7 @@ public class Animal {
     @GeneratedValue
     private Long id;
     @NotNull
-    @Min(value = 3, message = "Precisa de pelo menos 3 dígitos")
+    @Size(min = 3, message = "Precisa de pelo menos 3 dígitos")
     private String nome;
     @Enumerated(EnumType.STRING)
     @NotNull(message = "Sexo é um campo obrigatório")
